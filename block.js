@@ -1,3 +1,5 @@
+const SHA256 = require("crypto-js/sha256");
+
 class Block {
   constructor(timestamp, lasthash, hash, data) {
     this.timestamp = timestamp;
@@ -23,9 +25,13 @@ class Block {
     // usado para construir o primeiro bloco da blockchain
     const timestamp = Date.now();
     const lasthash = lastBlock.hash;
-    const hash = "a-fazer-hash";
+    const hash = Block.hash(timestamp, lasthash, data);
 
     return new this(timestamp, lasthash, hash, data);
+  }
+
+  static hash(timestamp, lasthash, data) {
+    return SHA256(`${timestamp}${lasthash}${data}`).toString();
   }
 }
 
