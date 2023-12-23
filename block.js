@@ -13,6 +13,11 @@ class Block {
             hash = ${this.hash.substring(0, 10)}
             data = ${this.data}`;
   }
+
+  static genesis() {
+    // Bloco usado para iniciar a blockchain
+    return new this("Genesis time", "-----", "f1r57-h45h", []);
+  }
 }
 
 module.exports = Block;
