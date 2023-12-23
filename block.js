@@ -18,6 +18,15 @@ class Block {
     // Bloco usado para iniciar a blockchain
     return new this("Genesis time", "-----", "f1r57-h45h", []);
   }
+
+  static mineBlock(lastBlock, data) {
+    // usado para construir o primeiro bloco da blockchain
+    const timestamp = Date.now();
+    const lasthash = lastBlock.hash;
+    const hash = "a-fazer-hash";
+
+    return new this(timestamp, lasthash, hash, data);
+  }
 }
 
 module.exports = Block;
