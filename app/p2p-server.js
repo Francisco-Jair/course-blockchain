@@ -29,14 +29,22 @@ class P2ppServer {
     console.log("Socket connected");
 
     this.messageHandler(socket);
+    this.sendChain(socket);
+  }
+
+  sendChain(socket) {
     socket.send(JSON.stringify(this.blockchain.chain));
   }
 
   messageHandler(socket) {
     socket.on("message", (message) => {
       const data = JSON.parse(message);
-      console.log("data", data);
+      this.blockchain.replaceChain(data);
     });
+  }
+
+  syncChain() {
+    this.socket.forEach((socket) => this.sendChain(socket));
   }
 }
 
